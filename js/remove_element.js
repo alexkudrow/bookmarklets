@@ -1,6 +1,14 @@
 javascript:(function(){
 	var currentElem = null;
 
+	window.focus();
+
+	function handleIFrameClick(event) {
+		if (document.activeElement.tagName === 'IFRAME') {
+			deleteElement(event);
+		}
+	}
+
 	function highlightElement(event) {
 		currentElem = event.target;
 		currentElem.style.background = 'pink';
@@ -32,12 +40,14 @@ javascript:(function(){
 	}
 
 	function releaseEvents() {
+		window.removeEventListener('blur', handleIFrameClick);
 		document.removeEventListener('mouseover', highlightElement);
 		document.removeEventListener('mouseout', unhighlightElement);
 		document.removeEventListener('click', deleteElement);
 		document.removeEventListener('keydown', escapeListener);
 
 		currentElem        =
+		handleIFrameClick  =
 		highlightElement   =
 		unhighlightElement =
 		deleteElement      =
@@ -45,6 +55,7 @@ javascript:(function(){
 		releaseEvents      = null;
 	}
 
+	window.addEventListener('blur', handleIFrameClick);
 	document.addEventListener('mouseover', highlightElement);
 	document.addEventListener('mouseout', unhighlightElement);
 	document.addEventListener('click', deleteElement);
