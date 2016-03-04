@@ -3,15 +3,14 @@ javascript:(function(){
 
 	function highlightElement(event) {
 		currentElem = event.target;
-		event.target.style.background = 'pink';
-		event.target.style.outline = '2px solid crimson';
+		currentElem.style.background = 'pink';
+		currentElem.style.outline = '2px solid crimson';
 	}
 
-	function unhighlightElement(event) {
-		if (event.target) {
+	function unhighlightElement() {
+		if (currentElem) {
 			currentElem.style.background = '';
 			currentElem.style.outline = '';
-			currentElem = null;
 		}
 	}
 
@@ -19,12 +18,15 @@ javascript:(function(){
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		event.target.style.display = 'none';
+		currentElem.style.display = 'none';
+
+		unhighlightElement();
 		releaseEvents();
 	}
 
 	function escapeListener(event) {
 		if (event.keyCode == 27) {
+			unhighlightElement();
 			releaseEvents();
 		}
 	}
@@ -34,8 +36,7 @@ javascript:(function(){
 		document.removeEventListener('mouseout', unhighlightElement);
 		document.removeEventListener('click', deleteElement);
 		document.removeEventListener('keydown', escapeListener);
-		currentElem.style.background = '';
-		currentElem.style.outline = '';
+
 		currentElem        =
 		highlightElement   =
 		unhighlightElement =
