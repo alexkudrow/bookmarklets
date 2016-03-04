@@ -27,7 +27,9 @@ javascript:(function(){
 		currentElem.parentNode.removeChild(currentElem);
 
 		unhighlightElement();
-		releaseEvents();
+		if (!event.ctrlKey) {
+			releaseEvents();
+		}
 	}
 
 	function escapeListener(event) {
