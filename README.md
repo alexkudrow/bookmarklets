@@ -1,3 +1,3 @@
 # bookmarklets
 
-[Remove Element](remove_element.min.js)
+[Remove Element](js/remove_element.min.js)
