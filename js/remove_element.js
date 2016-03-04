@@ -24,16 +24,17 @@ javascript:(function(){
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
+		unhighlightElement();
+
 		currentElem.parentNode.removeChild(currentElem);
 
-		unhighlightElement();
 		if (!event.ctrlKey) {
 			releaseEvents();
 		}
 	}
 
 	function escapeListener(event) {
-		if (event.keyCode == 27) {
+		if (event.keyCode === 27) {
 			unhighlightElement();
 			releaseEvents();
 		}
@@ -47,7 +48,7 @@ javascript:(function(){
 		document.removeEventListener('keydown', escapeListener);
 
 		currentElem        =
-		handleLostFocus  =
+		handleLostFocus    =
 		highlightElement   =
 		unhighlightElement =
 		deleteElement      =
