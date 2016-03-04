@@ -26,7 +26,7 @@ javascript:(function(){
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		currentElem.style.display = 'none';
+		currentElem.parentNode.removeChild(currentElem);
 
 		unhighlightElement();
 		releaseEvents();
