@@ -3,10 +3,8 @@ javascript:(function(){
 
 	window.focus();
 
-	function handleIFrameClick(event) {
-		if (document.activeElement.tagName === 'IFRAME') {
-			deleteElement(event);
-		}
+	function handleLostFocus(event) {
+		deleteElement(event);
 	}
 
 	function highlightElement(event) {
@@ -40,14 +38,14 @@ javascript:(function(){
 	}
 
 	function releaseEvents() {
-		window.removeEventListener('blur', handleIFrameClick);
+		window.removeEventListener('blur', handleLostFocus);
 		document.removeEventListener('mouseover', highlightElement);
 		document.removeEventListener('mouseout', unhighlightElement);
 		document.removeEventListener('click', deleteElement);
 		document.removeEventListener('keydown', escapeListener);
 
 		currentElem        =
-		handleIFrameClick  =
+		handleLostFocus  =
 		highlightElement   =
 		unhighlightElement =
 		deleteElement      =
@@ -55,7 +53,7 @@ javascript:(function(){
 		releaseEvents      = null;
 	}
 
-	window.addEventListener('blur', handleIFrameClick);
+	window.addEventListener('blur', handleLostFocus);
 	document.addEventListener('mouseover', highlightElement);
 	document.addEventListener('mouseout', unhighlightElement);
 	document.addEventListener('click', deleteElement);
