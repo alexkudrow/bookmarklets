@@ -4,7 +4,9 @@ javascript:(function(){
 	window.focus();
 
 	function handleLostFocus(event) {
-		deleteElement(event);
+		if (document.activeElement.tagName !== 'BODY') {
+			deleteElement(event);
+		}
 	}
 
 	function highlightElement(event) {
