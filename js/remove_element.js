@@ -1,5 +1,6 @@
 javascript:(function(){
-	var currentElem = null;
+	var currentElem   = null,
+	    isCtrlPressed = false;
 
 	window.focus();
 
@@ -30,16 +31,22 @@ javascript:(function(){
 
 		currentElem.parentNode.removeChild(currentElem);
 
-		if (!event.ctrlKey) {
+		if (!isCtrlPressed) {
 			releaseEvents();
 		}
 	}
 
-	function escapeListener(event) {
+	function handleKeyDown(event) {
 		if (event.keyCode === 27) {
 			unhighlightElement();
 			releaseEvents();
 		}
+
+		isCtrlPressed = event.ctrlKey;
+	}
+
+	function handleKeyUp(event) {
+		isCtrlPressed = event.ctrlKey;
 	}
 
 	function releaseEvents() {
@@ -47,14 +54,17 @@ javascript:(function(){
 		document.removeEventListener('mouseover', highlightElement);
 		document.removeEventListener('mouseout', unhighlightElement);
 		document.removeEventListener('click', deleteElement);
-		document.removeEventListener('keydown', escapeListener);
+		document.removeEventListener('keydown', handleKeyDown);
+		document.removeEventListener('keyup', handleKeyUp);
 
 		currentElem        =
+		isCtrlPressed      =
 		handleLostFocus    =
 		highlightElement   =
 		unhighlightElement =
 		deleteElement      =
-		escapeListener     =
+		handleKeyDown      =
+		handleKeyUp        =
 		releaseEvents      = null;
 	}
 
@@ -62,5 +72,6 @@ javascript:(function(){
 	document.addEventListener('mouseover', highlightElement);
 	document.addEventListener('mouseout', unhighlightElement);
 	document.addEventListener('click', deleteElement);
-	document.addEventListener('keydown', escapeListener);
+	document.addEventListener('keydown', handleKeyDown);
+	document.addEventListener('keyup', handleKeyUp);
 })();
