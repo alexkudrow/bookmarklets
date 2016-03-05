@@ -1,8 +1,15 @@
 javascript:(function(){
-	var currentElem   = null,
-	    isCtrlPressed = false;
+	var currentElem  = null,
+	    keepDeleting = false;
 
 	window.focus();
+
+	window.addEventListener('blur', handleLostFocus);
+	document.addEventListener('mouseover', highlightElement);
+	document.addEventListener('mouseout', unhighlightElement);
+	document.addEventListener('click', deleteElement);
+	document.addEventListener('keydown', handleKeyDown);
+	document.addEventListener('keyup', handleKeyUp);
 
 	function handleLostFocus(event) {
 		if (document.activeElement.tagName !== 'BODY') {
@@ -27,29 +34,28 @@ javascript:(function(){
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		unhighlightElement();
-
 		currentElem.parentNode.removeChild(currentElem);
 
-		if (!isCtrlPressed) {
+		if (!keepDeleting) {
 			releaseEvents();
 		}
 	}
 
 	function handleKeyDown(event) {
 		if (event.keyCode === 27) {
-			unhighlightElement();
 			releaseEvents();
 		}
 
-		isCtrlPressed = event.ctrlKey;
+		keepDeleting = event.ctrlKey;
 	}
 
 	function handleKeyUp(event) {
-		isCtrlPressed = event.ctrlKey;
+		keepDeleting = event.ctrlKey;
 	}
 
 	function releaseEvents() {
+		unhighlightElement();
+
 		window.removeEventListener('blur', handleLostFocus);
 		document.removeEventListener('mouseover', highlightElement);
 		document.removeEventListener('mouseout', unhighlightElement);
@@ -58,7 +64,7 @@ javascript:(function(){
 		document.removeEventListener('keyup', handleKeyUp);
 
 		currentElem        =
-		isCtrlPressed      =
+		keepDeleting       =
 		handleLostFocus    =
 		highlightElement   =
 		unhighlightElement =
@@ -67,11 +73,4 @@ javascript:(function(){
 		handleKeyUp        =
 		releaseEvents      = null;
 	}
-
-	window.addEventListener('blur', handleLostFocus);
-	document.addEventListener('mouseover', highlightElement);
-	document.addEventListener('mouseout', unhighlightElement);
-	document.addEventListener('click', deleteElement);
-	document.addEventListener('keydown', handleKeyDown);
-	document.addEventListener('keyup', handleKeyUp);
 })();
