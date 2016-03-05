@@ -14,6 +14,8 @@ javascript:(function(){
 	function handleLostFocus(event) {
 		if (document.activeElement.tagName !== 'BODY') {
 			deleteElement(event);
+		} else {
+			releaseEvents();
 		}
 	}
 
