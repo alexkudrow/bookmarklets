@@ -9,3 +9,5 @@
 [Body background](js/body_background.min.js)
 
 [Root page](js/root_page.min.js)
+
+[Up page](js/up_page.min.js)
