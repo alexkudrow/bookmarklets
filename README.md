@@ -7,3 +7,5 @@
 [Translate to Eng](js/translate_to_eng.min.js)
 
 [Body background](js/body_background.min.js)
+
+[Root page](js/root_page.min.js)
