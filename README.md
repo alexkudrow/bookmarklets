@@ -11,3 +11,5 @@
 [Root page](js/root_page.min.js)
 
 [Up page](js/up_page.min.js)
+
+[External scripts](js/external_scripts.min.js)
