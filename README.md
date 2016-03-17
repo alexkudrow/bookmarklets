@@ -13,3 +13,5 @@
 [Up page](js/up_page.min.js)
 
 [External scripts](js/external_scripts.min.js)
+
+[External styles](js/external_styles.min.js)
