@@ -2,8 +2,8 @@
 # Project files
 # =========================
 
-drag_js_file_here.bat
-packer.wsf
+packer-wsh.js
+compressor.wsf
 
 # =========================
 # Operating System Files
